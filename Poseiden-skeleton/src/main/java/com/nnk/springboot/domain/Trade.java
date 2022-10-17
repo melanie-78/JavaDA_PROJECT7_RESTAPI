@@ -34,15 +34,17 @@ public class Trade {
     public Trade() {
     }
 
-    public Trade(String trade_account, String type) {
+    public Trade(String account, String type) {
+        this.account = account;
+        this.type = type;
     }
 
     public Integer getTradeId() {
         return tradeId;
     }
 
-    public void setTradeId(Integer tradeId) {
-        this.tradeId = tradeId;
+    public void setTradeId(Integer tradeId){
+            this.tradeId = tradeId;
     }
 
     public String getAccount() {

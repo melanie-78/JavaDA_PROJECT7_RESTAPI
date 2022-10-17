@@ -10,6 +10,7 @@ public class User {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
     @NotBlank(message = "Username is mandatory")
+    @Column(unique = true)
     private String username;
     @NotBlank(message = "Password is mandatory")
     private String password;
@@ -17,6 +18,17 @@ public class User {
     private String fullname;
     @NotBlank(message = "Role is mandatory")
     private String role;
+
+    public User() {
+    }
+
+    public User(Integer id, String username, String password, String fullname, String role) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.fullname = fullname;
+        this.role = role;
+    }
 
     public Integer getId() {
         return id;

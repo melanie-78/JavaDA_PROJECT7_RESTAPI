@@ -17,6 +17,10 @@ public class Rating {
     }
 
     public Rating(String moodys_rating, String sand_pRating, String fitch_rating, int i) {
+        this.moodysRating = moodys_rating;
+        this.sandPRating = sand_pRating;
+        this.fitchRating = fitch_rating;
+        this.orderNumber = i;
     }
 
     public Rating(Integer id, String moodysRating, String sandPRating, String fitchRating, Integer orderNumber) {
