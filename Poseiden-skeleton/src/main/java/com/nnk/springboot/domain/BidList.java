@@ -40,6 +40,9 @@ public class BidList {
     }
 
     public BidList(String account_test, String type_test, double v) {
+        this.account= account_test;
+        this.type= type_test;
+        this.bidQuantity=v;
     }
 
     public Integer getBidListId() {
