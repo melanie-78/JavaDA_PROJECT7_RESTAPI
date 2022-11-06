@@ -11,15 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.security.Principal;
 
 @Controller
-public class HomeController
-{
+public class HomeController {
 	@RequestMapping("/")
 	public String home(Model model, Authentication authentication)
 	{
-		String name = authentication.getName();
-		DefaultOAuth2User user = (DefaultOAuth2User) authentication.getPrincipal();
-		String login = (String) user.getAttributes().get("login");
-		String a = "toto";
 		return "home";
 	}
 
