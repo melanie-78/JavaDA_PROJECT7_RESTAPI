@@ -47,7 +47,7 @@ public class RatingController {
     }
 
     @PostMapping("/rating/validate")
-    public String validate(@Valid Rating rating, BindingResult result, Model model) {
+    public String validate(Rating rating, BindingResult result, Model model) {
         // check data valid and save to db, after saving return Rating list
         if (!result.hasErrors()) {
             log.info("CREATE /validate with rating {}", rating);

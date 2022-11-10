@@ -2,6 +2,7 @@ package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.repositories.UserRepository;
+import com.nnk.springboot.util.ValidatePassword;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -39,11 +40,15 @@ public class UserController {
     public String validate(@Valid User user, BindingResult result, Model model) {
         if (!result.hasErrors()) {
             log.info("CREATE /validate with user {}", user);
-            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-            user.setPassword(encoder.encode(user.getPassword()));
-            userRepository.save(user);
-            model.addAttribute("users", userRepository.findAll());
-            return "redirect:/user/list";
+
+            if(ValidatePassword.checkPass(user)&&ValidatePassword.hasSpecialCharacter(user)) {
+                BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+                user.setPassword(encoder.encode(user.getPassword()));
+                userRepository.save(user);
+                model.addAttribute("users", userRepository.findAll());
+                return "redirect:/user/list";
+            }
         }
         log.error("CREATE /validate error : {}",result);
         return "user/add";

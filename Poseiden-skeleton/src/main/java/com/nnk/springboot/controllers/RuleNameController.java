@@ -45,7 +45,7 @@ public class RuleNameController {
     }
 
     @PostMapping("/ruleName/validate")
-    public String validate(@Valid RuleName ruleName, BindingResult result, Model model) {
+    public String validate(RuleName ruleName, BindingResult result, Model model) {
         // check data valid and save to db, after saving return RuleName list
         if (!result.hasErrors()) {
             log.info("CREATE /validate with ruleName {}", ruleName);

@@ -92,4 +92,5 @@ public class RuleName {
     public void setSqlPart(String sqlPart) {
         this.sqlPart = sqlPart;
     }
+
 }

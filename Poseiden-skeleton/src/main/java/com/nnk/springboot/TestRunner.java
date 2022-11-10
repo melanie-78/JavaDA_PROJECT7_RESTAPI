@@ -16,8 +16,8 @@ public class TestRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        String pwd = passwordEncoder.encode("ouioui");
-        String pwd1 = passwordEncoder.encode("nonnon");
+        String pwd = passwordEncoder.encode("Melanie8!");
+        String pwd1 = passwordEncoder.encode("Franck8!");
 
         User melAdmin = new User(null, "Mel", pwd, "Melanie", "ADMIN");
         User franckUser = new User(null, "Franck", pwd1, "Franck Aurelien", "USER");
