@@ -39,6 +39,12 @@ public class Trade {
         this.type = type;
     }
 
+    public Trade(Integer tradeId, String trade_account, String type) {
+        this.tradeId = tradeId;
+        this.account = trade_account;
+        this.type = type;
+    }
+
     public Integer getTradeId() {
         return tradeId;
     }

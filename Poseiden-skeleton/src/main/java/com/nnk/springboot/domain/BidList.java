@@ -39,7 +39,20 @@ public class BidList {
     public BidList() {
     }
 
+    public BidList(Integer bidListId, String account_test, String type_test ) {
+        this.bidListId = bidListId;
+        this.account = account_test;
+        this.type = type_test;
+    }
+
     public BidList(String account_test, String type_test, double v) {
+        this.account= account_test;
+        this.type= type_test;
+        this.bidQuantity=v;
+    }
+
+    public BidList(Integer bidListId, String account_test, String type_test, double v) {
+        this.bidListId = bidListId;
         this.account= account_test;
         this.type= type_test;
         this.bidQuantity=v;

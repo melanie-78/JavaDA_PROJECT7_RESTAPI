@@ -37,6 +37,13 @@ public class CurvePoint {
         this.value = v1;
     }
 
+    public CurvePoint(Integer id, int i1, double v, double v1) {
+        this.curveId = curveId;
+        this.curveId = i1;
+        this.term = v;
+        this.value = v1;
+    }
+
     public Integer getId() {
         return id;
     }

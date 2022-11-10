@@ -30,11 +30,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/user/**").hasAuthority("ADMIN");
         http.exceptionHandling().accessDeniedPage("/403");
         http.authorizeRequests().anyRequest().authenticated();
-        http.formLogin();
-    }
-
-    @Bean
-    PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
+        http.formLogin()
+                .and()
+                .oauth2Login();
     }
 }

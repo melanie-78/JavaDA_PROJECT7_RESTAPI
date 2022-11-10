@@ -2,6 +2,7 @@ package com.nnk.springboot.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "users")
@@ -13,6 +14,7 @@ public class User {
     @Column(unique = true)
     private String username;
     @NotBlank(message = "Password is mandatory")
+    @Size(min=8)
     private String password;
     @NotBlank(message = "FullName is mandatory")
     private String fullname;
@@ -24,6 +26,13 @@ public class User {
 
     public User(Integer id, String username, String password, String fullname, String role) {
         this.id = id;
+        this.username = username;
+        this.password = password;
+        this.fullname = fullname;
+        this.role = role;
+    }
+
+    public User(String username, String password, String fullname, String role) {
         this.username = username;
         this.password = password;
         this.fullname = fullname;
