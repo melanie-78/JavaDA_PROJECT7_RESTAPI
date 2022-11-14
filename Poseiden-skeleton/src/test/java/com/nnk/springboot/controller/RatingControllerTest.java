@@ -67,9 +67,8 @@ public class RatingControllerTest {
                         .param("sandPRating", "Sand Rating" )
                         .param("fitchRating", "Fitch Rating")
                         .param("orderNumber", "1"))
-                .andExpect(MockMvcResultMatchers.status().isForbidden())
-                //.andExpect(MockMvcResultMatchers.model().attributeExists("listOfRating"))
-        ;
+                .andExpect(MockMvcResultMatchers.status().is3xxRedirection());
+                //.andExpect(MockMvcResultMatchers.model().attributeExists("listOfRating"));
     }
 
     @Test
@@ -87,7 +86,7 @@ public class RatingControllerTest {
                 .andExpect(MockMvcResultMatchers.view().name("rating/update"));
     }
 
-    //@Test
+    @Test
     @WithMockUser
     public void testUpdateRating() throws Exception {
         Integer id = 1;
