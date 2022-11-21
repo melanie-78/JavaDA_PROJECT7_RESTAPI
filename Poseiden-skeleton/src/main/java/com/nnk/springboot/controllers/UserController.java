@@ -42,7 +42,7 @@ public class UserController {
         if (!result.hasErrors()) {
             log.info("CREATE /validate with user {}", user);
 
-            if(ValidatePassword.checkPass(user)&&ValidatePassword.hasSpecialCharacter(user)) {
+            if(ValidatePassword.hasNumAndCap(user)&&ValidatePassword.hasSpecialCharacter(user)) {
                 BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
                 user.setPassword(encoder.encode(user.getPassword()));
