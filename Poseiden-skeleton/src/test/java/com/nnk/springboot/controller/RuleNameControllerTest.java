@@ -62,26 +62,24 @@ public class RuleNameControllerTest {
 
     }
 
-    //@Test
+    @Test
     @WithMockUser
     public void testValidate() throws Exception {
-        RuleName ruleName = new RuleName("Rule Name", "Description", "Json", "Template", "SQL", "SQL Part");
+        RuleName ruleName = new RuleName();
+        RuleName savedRuleName = new RuleName();
 
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
-        ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
-        String requestJson=ow.writeValueAsString(ruleName);
-
-        when(ruleNameService.saveRuleName(ruleName)).thenReturn(ruleName);
+        when(ruleNameService.saveRuleName(ruleName)).thenReturn(savedRuleName);
 
         this.mockMvc
                 .perform(post("/ruleName/validate")
-                        .content(requestJson)
-                        .contentType(MediaType.APPLICATION_JSON))
+                        .param("name","Rule Name")
+                        .param("description","Description")
+                        .param("json","Json")
+                        .param("template","Template")
+                        .param("sqlStr","SQL")
+                        .param("sqlPart","SQL Part"))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/ruleName/list"))
-                //.andExpect(model().attributeExists("listOfRuleName"))
-        ;
+                .andExpect(redirectedUrl("/ruleName/list"));
     }
 
     @Test
@@ -99,20 +97,24 @@ public class RuleNameControllerTest {
                 .andExpect(MockMvcResultMatchers.view().name("ruleName/update"));
     }
 
-    //@Test
+    @Test
     @WithMockUser
     public void testUpdateRuleName() throws Exception {
         Integer id = 1;
         RuleName ruleName = new RuleName();
-        RuleName savedRuleName = new RuleName();
 
-        //when(ruleNameService.saveRuleName(ruleName)).thenReturn(savedRuleName);
+        when(ruleNameService.saveRuleName(ruleName)).thenReturn(ruleName);
 
         this.mockMvc
-                .perform(post("/ruleName/update/" + id))
+                .perform(post("/ruleName/update/" + id)
+                        .param("name","Rule Name")
+                        .param("description","Description")
+                        .param("json","Json")
+                        .param("template","Template")
+                        .param("sqlStr","SQL")
+                        .param("sqlPart","SQL Part"))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/ruleName/list"))
-                .andExpect(model().attributeExists("listOfRuleName"));
+                .andExpect(redirectedUrl("/ruleName/list"));
     }
 
     @Test

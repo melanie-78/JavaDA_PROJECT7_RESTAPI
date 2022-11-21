@@ -1,5 +1,6 @@
 package com.nnk.springboot.controllers;
 
+import com.nnk.springboot.ErrorResponse;
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.repositories.UserRepository;
 import com.nnk.springboot.util.ValidatePassword;
@@ -48,6 +49,13 @@ public class UserController {
                 userRepository.save(user);
                 model.addAttribute("users", userRepository.findAll());
                 return "redirect:/user/list";
+            }else{
+                ErrorResponse errorResponse = new ErrorResponse();
+                String message = "Password must contain at least one uppercase letter, " +
+                        "at least 8 characters, at least one number and one symbol ";
+                errorResponse.setErrorMessage(message);
+                model.addAttribute("errorResponse", errorResponse);
+                return "user/add";
             }
         }
         log.error("CREATE /validate error : {}",result);
