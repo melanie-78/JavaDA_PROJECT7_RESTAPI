@@ -6,7 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ValidatePassword {
-    public static Boolean checkPass(User user){
+    public static Boolean hasNumAndCap(User user){
         //access to user's password
         String password = user.getPassword();
 
