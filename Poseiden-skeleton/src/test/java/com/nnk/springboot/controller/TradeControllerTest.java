@@ -53,7 +53,7 @@ public class TradeControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
-    //@Test
+    @Test
     @WithMockUser
     public void testValidate() throws Exception {
         Trade trade = new Trade();
@@ -62,9 +62,10 @@ public class TradeControllerTest {
         when(tradeService.saveTrade(trade)).thenReturn(savedTrade);
 
         this.mockMvc
-                .perform(MockMvcRequestBuilders.post("/trade/validate"))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.model().attributeExists("listOfTrade"));
+                .perform(MockMvcRequestBuilders.post("/trade/validate")
+                        .param("account","Account")
+                        .param("type", "type"))
+                .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
     @Test
@@ -82,20 +83,20 @@ public class TradeControllerTest {
                 .andExpect(MockMvcResultMatchers.view().name("trade/update"));
     }
 
-    //@Test
+    @Test
     @WithMockUser
     public void testUpdateTrade() throws Exception {
         Integer id = 1;
         Trade trade = new Trade();
-        Trade savedTrade = new Trade();
 
-        when(tradeService.saveTrade(trade)).thenReturn(savedTrade);
+        when(tradeService.saveTrade(trade)).thenReturn(trade);
 
         this.mockMvc
-                .perform(MockMvcRequestBuilders.post("/trade/update/" + id))
+                .perform(MockMvcRequestBuilders.post("/trade/update/" + id)
+                        .param("account","Account")
+                        .param("type", "type"))
                 .andExpect(MockMvcResultMatchers.status().is3xxRedirection())
-                .andExpect(MockMvcResultMatchers.redirectedUrl("/trade/list"))
-                .andExpect(MockMvcResultMatchers.model().attributeExists("listOfTrade"));
+                .andExpect(MockMvcResultMatchers.redirectedUrl("/trade/list"));
     }
 
     @Test

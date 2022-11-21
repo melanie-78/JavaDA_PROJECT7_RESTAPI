@@ -68,7 +68,6 @@ public class RatingControllerTest {
                         .param("fitchRating", "Fitch Rating")
                         .param("orderNumber", "1"))
                 .andExpect(MockMvcResultMatchers.status().is3xxRedirection());
-                //.andExpect(MockMvcResultMatchers.model().attributeExists("listOfRating"));
     }
 
     @Test
@@ -98,11 +97,10 @@ public class RatingControllerTest {
                 .perform(MockMvcRequestBuilders.post("/rating/update/" + id)
                         .param("moodysRating","Moodys Rating")
                         .param("sandPRating", "Sand Rating" )
-                        .param("fitchRating", "Fitch Rating"))
+                        .param("fitchRating", "Fitch Rating")
+                        .param("orderNumber", "1"))
                 .andExpect(MockMvcResultMatchers.status().is3xxRedirection())
-                .andExpect(MockMvcResultMatchers.redirectedUrl("/rating/list"))
-                //.andExpect(MockMvcResultMatchers.model().attributeExists("listOfRating"))
-        ;
+                .andExpect(MockMvcResultMatchers.redirectedUrl("/rating/list"));
     }
 
     @Test

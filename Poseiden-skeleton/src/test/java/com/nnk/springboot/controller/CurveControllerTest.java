@@ -61,7 +61,7 @@ public class CurveControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
-    //@Test
+    @Test
     @WithMockUser
     public void testValidate() throws Exception {
         CurvePoint curvePoint = new CurvePoint();
@@ -70,9 +70,11 @@ public class CurveControllerTest {
         when(curvePointService.saveCurvePoint(curvePoint)).thenReturn(savedCurvePoint);
 
         this.mockMvc
-                .perform(MockMvcRequestBuilders.post("/curvePoint/validate").content(""))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.model().attributeExists("listOfCurvePoint"));
+                .perform(MockMvcRequestBuilders.post("/curvePoint/validate")
+                        .param("curveId", "Curve Id")
+                        .param("term", "10")
+                        .param("value", "10d"))
+                .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
     @Test
@@ -90,25 +92,20 @@ public class CurveControllerTest {
                 .andExpect(MockMvcResultMatchers.view().name("curvePoint/update"));
     }
 
-    //@Test
+    @Test
     @WithMockUser
     public void testUpdateCurvePoint() throws Exception {
         Integer id = 1;
         CurvePoint curvePoint = new CurvePoint(1, 10, 10d, 30d);
-        //CurvePoint savedCurvePoint = new CurvePoint();
-
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
-        ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
-        String requestJson=ow.writeValueAsString(curvePoint);
 
         when(curvePointService.saveCurvePoint(curvePoint)).thenReturn(curvePoint);
 
         this.mockMvc
-                .perform(MockMvcRequestBuilders.post("/curvePoint/update/" + id).content(requestJson))
-                .andExpect(MockMvcResultMatchers.status().is3xxRedirection())
-                .andExpect(MockMvcResultMatchers.redirectedUrl("/curvePoint/list"))
-                .andExpect(MockMvcResultMatchers.model().attributeExists("listOfCurvePoint"));
+                .perform(MockMvcRequestBuilders.post("/curvePoint/update/" + id)
+                        .param("curveId", "Curve Id")
+                        .param("term", "10")
+                        .param("value", "10d"))
+                .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
     @Test

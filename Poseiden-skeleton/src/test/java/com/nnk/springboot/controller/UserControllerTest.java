@@ -48,7 +48,7 @@ public class UserControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
-    //@Test
+    @Test
     @WithMockUser(username = "Mel", authorities = {"ADMIN"})
     public void testValidate() throws Exception {
         User user = new User();
@@ -57,9 +57,12 @@ public class UserControllerTest {
         when(userRepository.save(user)).thenReturn(savedUser);
 
         this.mockMvc
-                .perform(MockMvcRequestBuilders.post("/user/validate"))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.model().attributeExists("users"));
+                .perform(MockMvcRequestBuilders.post("/user/validate")
+                        .param("username","Mela")
+                        .param("password","Dieumer80!")
+                        .param("fullname","Melanie Adj")
+                        .param("role","USER"))
+                .andExpect(MockMvcResultMatchers.status().is3xxRedirection());
     }
 
     @Test
@@ -77,20 +80,22 @@ public class UserControllerTest {
                 .andExpect(MockMvcResultMatchers.view().name("user/update"));
     }
 
-    //@Test
+    @Test
     @WithMockUser(username = "Mel", authorities = {"ADMIN"})
     public void testUpdateUser() throws Exception {
         Integer id = 1;
         User user = new User();
-        User savedUser = new User();
 
-        when(userRepository.save(user)).thenReturn(savedUser);
+        when(userRepository.save(user)).thenReturn(user);
 
         this.mockMvc
-                .perform(MockMvcRequestBuilders.post("/user/update/" + id))
+                .perform(MockMvcRequestBuilders.post("/user/update/" + id)
+                        .param("username","Mela")
+                        .param("password","Dieumer80!")
+                        .param("fullname","Melanie Adj")
+                        .param("role","USER"))
                 .andExpect(MockMvcResultMatchers.status().is3xxRedirection())
-                .andExpect(MockMvcResultMatchers.redirectedUrl("/user/list"))
-                .andExpect(MockMvcResultMatchers.model().attributeExists("users"));
+                .andExpect(MockMvcResultMatchers.redirectedUrl("/user/list"));
     }
 
     @Test

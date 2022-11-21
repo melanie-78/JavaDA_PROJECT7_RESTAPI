@@ -77,6 +77,39 @@ public class BidListControllerTest {
 
     @Test
     @WithMockUser
+    public void testValidate() throws Exception {
+        BidList bidList = new BidList();
+        BidList savedBidList = new BidList();
+
+        when(bidListService.saveBid(bidList)).thenReturn(savedBidList);
+
+        this.mockMvc
+                .perform(MockMvcRequestBuilders.post("/bidList/validate")
+                        .param("account","Account Test")
+                        .param("type", "Type test" )
+                        .param("bidQuantity", "10d"))
+                .andExpect(MockMvcResultMatchers.status().is3xxRedirection());
+    }
+
+    @Test
+    @WithMockUser
+    public void testUpdateBid() throws Exception {
+        BidList bidList = new BidList();
+        Integer bidListId = 1;
+
+        when(bidListService.saveBid(bidList)).thenReturn(bidList);
+
+        this.mockMvc
+                .perform(MockMvcRequestBuilders.post("/bidList/update/"+ bidListId)
+                        .param("account","Account Test")
+                        .param("type", "Type test" )
+                        .param("bidQuantity", "10"))
+                .andExpect(MockMvcResultMatchers.status().is3xxRedirection())
+                .andExpect(MockMvcResultMatchers.redirectedUrl("/bidList/list"));
+    }
+
+    @Test
+    @WithMockUser
     public void testDeleteBid() throws Exception {
         Integer id = 1;
         BidList bidList = new BidList(1,"Account Test", "Type Test", 10d);
