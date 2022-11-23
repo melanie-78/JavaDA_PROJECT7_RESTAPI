@@ -55,11 +55,11 @@ public class UserController {
                         "at least 8 characters, at least one number and one symbol ";
                 errorResponse.setErrorMessage(message);
                 model.addAttribute("errorResponse", errorResponse);
-                return "user/add";
+                return "redirect:/user/add";
             }
         }
         log.error("CREATE /validate error : {}",result);
-        return "user/add";
+        return "redirect:/user/add";
     }
 
     @GetMapping("/user/update/{id}")

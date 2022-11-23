@@ -14,18 +14,29 @@ public class BidListServiceImpl implements BidListService{
         this.bidListRepository = bidListRepository;
     }
 
+    /**
+     * @return the list of all bid stored in database
+     */
     @Override
     public List<BidList> getAllBidList() {
         List<BidList> bidLists = bidListRepository.findAll();
         return bidLists;
     }
 
+    /**
+     * @param bid a bidList type object
+     * @return bid saved in database
+     */
     @Override
     public BidList saveBid(BidList bid) {
         BidList savedBid = bidListRepository.save(bid);
         return savedBid;
     }
 
+    /**
+     * @param bidListId identifier of the bid we want to get
+     * @return a bidList object saved in database if existing
+     */
     @Override
     public BidList getBid(Integer bidListId) {
         BidList bidById = bidListRepository.findById(bidListId)
@@ -33,6 +44,9 @@ public class BidListServiceImpl implements BidListService{
         return bidById;
     }
 
+    /**
+     * @param bidListId identifier of the bid we want to delete
+     */
     @Override
     public void deleteBid(Integer bidListId) {
         BidList bidById= bidListRepository.findById(bidListId)
