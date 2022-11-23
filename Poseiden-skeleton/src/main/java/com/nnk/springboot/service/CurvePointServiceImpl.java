@@ -9,15 +9,25 @@ import java.util.List;
 
 @Service
 public class CurvePointServiceImpl implements CurvePointService {
-    @Autowired
+
     private CurvePointRepository curvePointRepository;
 
+    public CurvePointServiceImpl(CurvePointRepository curvePointRepository) {
+        this.curvePointRepository = curvePointRepository;
+    }
+
+    /**
+     * @return the list of all curvePoint stored in database
+     */
     @Override
     public List<CurvePoint> getAllCurvePoint() {
         List<CurvePoint> allCurvePoint = curvePointRepository.findAll();
         return allCurvePoint;
     }
 
+    /**
+     * @param curveId identifier of the curvePoint we want to delete
+     */
     @Override
     public void deleteCurvePoint(Integer curveId) {
         CurvePoint curvePoint = curvePointRepository.findById(curveId)
@@ -25,12 +35,20 @@ public class CurvePointServiceImpl implements CurvePointService {
         curvePointRepository.delete(curvePoint);
     }
 
+    /**
+     * @param curvePoint a curvePoint type object
+     * @return curvePoint saved in database with an identifier
+     */
     @Override
     public CurvePoint saveCurvePoint(CurvePoint curvePoint) {
         CurvePoint savedCurvePoint = curvePointRepository.save(curvePoint);
         return savedCurvePoint;
     }
 
+    /**
+     * @param id identifier of a curvePoint we want to get
+     * @return curvePoint object saved in database if existing
+     */
     @Override
     public CurvePoint getCurvePointById(Integer id) {
         CurvePoint curvePointById = curvePointRepository.findById(id)

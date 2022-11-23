@@ -18,6 +18,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private SecurityService securityService;
 
+    /**
+     * @param username the username of a user
+     * @return a userDetails type object obtained from the username
+     * @throws UsernameNotFoundException to specify that this username doesn't exist in database
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User userApp = securityService.loadUserByUserName(username);

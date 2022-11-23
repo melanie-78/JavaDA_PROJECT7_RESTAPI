@@ -14,6 +14,10 @@ public class SecurityServiceImpl implements SecurityService{
         this.userRepository = userRepository;
     }
 
+    /**
+     * @param username the username of a user
+     * @return a user saved in database with this username
+     */
     @Override
     public User loadUserByUserName(String username) {
         User user = userRepository.findByUsername(username)
